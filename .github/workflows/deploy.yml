@@ -1,8 +1,19 @@
-name: User Deployment
-on: [push, workflow_dispatch]
+name: User CICD
+run-name: User CICD
+on: [push]
 jobs:
-  deploy:
+  ci:
     uses: VenkatBheemireddyOrg/github-reusable-actions/.github/workflows/ci.yml@main
     with:
-      component: user     #with block is to pass parameter
+      component: user
+      appType: nodejs
+
+  deploy:
+    needs: ci
+    uses: VenkatBheemireddyOrg/github-reusable-actions/.github/workflows/deploy.yml@main
+    with:
+      component: user
+
+
+
 
